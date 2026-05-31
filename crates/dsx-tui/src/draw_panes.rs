@@ -39,12 +39,12 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
+                    .border_type(BorderType::Thick)
                     .border_style(Style::default().fg(Color::DarkGray))
                     .title(Span::styled(
                         tr(self.lang, "sidebar_title"),
                         Style::default()
-                            .fg(Color::LightBlue)
+                            .fg(Color::LightCyan)
                             .add_modifier(Modifier::BOLD),
                     )),
             )
@@ -71,7 +71,7 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
+                    .border_type(BorderType::Thick)
                     .border_style(Style::default().fg(Color::LightMagenta))
                     .title(Span::styled(
                         tr(self.lang, "reasoning_title"),
@@ -90,7 +90,7 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
+                    .border_type(BorderType::Thick)
                     .border_style(Style::default().fg(Color::Yellow))
                     .title(Span::styled(
                         tr(self.lang, "diff_title"),
@@ -108,14 +108,14 @@ impl App {
 fn file_style(path: &str) -> Style {
     if path.ends_with('/') || path.contains('/') {
         Style::default()
-            .fg(Color::LightBlue)
+            .fg(Color::LightCyan)
             .add_modifier(Modifier::BOLD)
     } else if path.ends_with(".rs") {
         Style::default().fg(Color::Yellow)
     } else if path.ends_with(".toml") || path.ends_with(".md") {
         Style::default().fg(Color::Cyan)
     } else {
-        Style::default().fg(Color::White)
+        Style::default().fg(Color::LightGreen)
     }
 }
 
@@ -226,6 +226,6 @@ fn diff_style(line: &str) -> Style {
     } else if line.starts_with("diff") || line.starts_with("index") {
         Style::default().fg(Color::DarkGray)
     } else {
-        Style::default().fg(Color::White)
+        Style::default().fg(Color::LightGreen)
     }
 }

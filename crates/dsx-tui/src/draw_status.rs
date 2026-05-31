@@ -20,7 +20,7 @@ impl App {
             "yolo" => Color::LightRed,
             "auto" => Color::LightYellow,
             "ask" => Color::LightCyan,
-            "plan-only" => Color::LightBlue,
+            "plan-only" => Color::LightCyan,
             _ => Color::DarkGray,
         };
         let running = matches!(self.agent_task, AgentTask::Running(_));
@@ -95,7 +95,7 @@ impl App {
 
         spans.extend([key("Ctrl+C"), plain(tr(self.lang, "status_quit"))]);
         let status_bar = Paragraph::new(Line::from(spans))
-            .style(Style::default().bg(Color::Black).fg(Color::Gray));
+            .style(Style::default().bg(Color::Black).fg(Color::Green));
         frame.render_widget(status_bar, area);
     }
 }
