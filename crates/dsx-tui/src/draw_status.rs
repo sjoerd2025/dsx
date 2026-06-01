@@ -21,7 +21,7 @@ impl App {
             "auto" => Color::LightYellow,
             "ask" => Color::LightCyan,
             "plan-only" => Color::LightBlue,
-            _ => Color::DarkGray,
+            _ => Color::Magenta,
         };
         let running = matches!(self.agent_task, AgentTask::Running(_));
         let cost = if self.cost > 0.0 {
@@ -95,7 +95,7 @@ impl App {
 
         spans.extend([key("Ctrl+C"), plain(tr(self.lang, "status_quit"))]);
         let status_bar = Paragraph::new(Line::from(spans))
-            .style(Style::default().bg(Color::Black).fg(Color::Gray));
+            .style(Style::default().bg(Color::Black).fg(Color::LightBlue));
         frame.render_widget(status_bar, area);
     }
 }
@@ -241,7 +241,7 @@ fn key(label: &'static str) -> Span<'static> {
     Span::styled(
         label,
         Style::default()
-            .fg(Color::Yellow)
+            .fg(Color::LightGreen)
             .add_modifier(Modifier::BOLD),
     )
 }
