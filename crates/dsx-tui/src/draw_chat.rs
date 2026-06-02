@@ -53,8 +53,8 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::Green))
+                    .border_type(BorderType::Thick)
+                    .border_style(Style::default().fg(Color::LightGreen))
                     .title(Span::styled(
                         tr(self.lang, "chat_title"),
                         Style::default()
@@ -127,9 +127,9 @@ fn role_label(lang: Language, role: &str) -> (&'static str, Style) {
 
 fn message_style(role: &str) -> Style {
     match role {
-        "assistant" => Style::default().fg(Color::Green),
+        "assistant" => Style::default().fg(Color::LightGreen),
         "user" => Style::default().fg(Color::LightCyan),
         "tool" => Style::default().fg(Color::White),
-        _ => Style::default().fg(Color::Gray),
+        _ => Style::default().fg(Color::DarkGray),
     }
 }
