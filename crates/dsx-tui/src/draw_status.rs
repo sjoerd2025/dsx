@@ -17,10 +17,10 @@ impl App {
     pub fn draw_status(&self, frame: &mut Frame, area: Rect) {
         let task = task_indicator(self.lang, &self.agent_task);
         let mode_color = match self.mode.as_str() {
-            "yolo" => Color::LightRed,
-            "auto" => Color::LightYellow,
-            "ask" => Color::LightCyan,
-            "plan-only" => Color::LightBlue,
+            "yolo" => Color::Magenta,
+            "auto" => Color::Cyan,
+            "ask" => Color::Green,
+            "plan-only" => Color::LightGreen,
             _ => Color::DarkGray,
         };
         let running = matches!(self.agent_task, AgentTask::Running(_));
@@ -95,7 +95,7 @@ impl App {
 
         spans.extend([key("Ctrl+C"), plain(tr(self.lang, "status_quit"))]);
         let status_bar = Paragraph::new(Line::from(spans))
-            .style(Style::default().bg(Color::Black).fg(Color::Gray));
+            .style(Style::default().bg(Color::Black).fg(Color::Green));
         frame.render_widget(status_bar, area);
     }
 }
