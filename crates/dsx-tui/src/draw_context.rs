@@ -25,11 +25,11 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::LightCyan))
+                    .border_type(BorderType::Thick)
+                    .border_style(Style::default().bg(Color::Black).fg(Color::LightCyan))
                     .title(Span::styled(
                         " Context Capsule ",
-                        Style::default()
+                        Style::default().bg(Color::Black)
                             .fg(Color::LightCyan)
                             .add_modifier(Modifier::BOLD),
                     )),
@@ -84,14 +84,14 @@ fn append_handoff(app: &App, lines: &mut Vec<Line<'static>>) {
 fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
     lines.push(Line::from(vec![Span::styled(
         "Folder notes:",
-        Style::default()
+        Style::default().bg(Color::Black)
             .fg(Color::LightBlue)
             .add_modifier(Modifier::BOLD),
     )]));
     if app.folder_notes.is_empty() {
         lines.push(Line::from(vec![Span::styled(
             "  none loaded",
-            Style::default().fg(Color::DarkGray),
+            Style::default().bg(Color::Black).fg(Color::DarkGray),
         )]));
         return;
     }
@@ -103,7 +103,7 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
             Span::raw(if selected { "> " } else { "  " }),
             Span::styled(
                 note.folder.clone(),
-                Style::default()
+                Style::default().bg(Color::Black)
                     .fg(if selected {
                         Color::LightCyan
                     } else {
@@ -116,17 +116,17 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
                     }),
             ),
             Span::raw(" "),
-            Span::styled(note.summary.clone(), Style::default().fg(Color::White)),
+            Span::styled(note.summary.clone(), Style::default().bg(Color::Black).fg(Color::White)),
         ]));
         lines.push(Line::from(vec![
             Span::raw("    next: "),
-            Span::styled(note.next_step.clone(), Style::default().fg(Color::Gray)),
+            Span::styled(note.next_step.clone(), Style::default().bg(Color::Black).fg(Color::Gray)),
         ]));
         lines.push(Line::from(vec![
             Span::raw("    arch: "),
             Span::styled(
                 note.architecture.clone(),
-                Style::default().fg(Color::LightBlue),
+                Style::default().bg(Color::Black).fg(Color::LightBlue),
             ),
         ]));
     }
@@ -219,12 +219,12 @@ fn push_field(
 ) {
     lines.push(Line::from(vec![Span::styled(
         format!("{label}:"),
-        Style::default().fg(color).add_modifier(Modifier::BOLD),
+        Style::default().bg(Color::Black).fg(color).add_modifier(Modifier::BOLD),
     )]));
     for line in value.lines().take(limit) {
         lines.push(Line::from(vec![
             Span::raw("  "),
-            Span::styled(line.to_string(), Style::default().fg(Color::White)),
+            Span::styled(line.to_string(), Style::default().bg(Color::Black).fg(Color::White)),
         ]));
     }
 }
@@ -238,9 +238,9 @@ fn push_inline(lines: &mut Vec<Line<'static>>, label: &'static str, value: &str,
     lines.push(Line::from(vec![
         Span::styled(
             format!("{label}: "),
-            Style::default().fg(color).add_modifier(Modifier::BOLD),
+            Style::default().bg(Color::Black).fg(color).add_modifier(Modifier::BOLD),
         ),
-        Span::styled(shown.to_string(), Style::default().fg(Color::White)),
+        Span::styled(shown.to_string(), Style::default().bg(Color::Black).fg(Color::White)),
     ]));
 }
 

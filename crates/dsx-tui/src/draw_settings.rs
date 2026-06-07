@@ -67,11 +67,11 @@ impl App {
         let paragraph = Paragraph::new(Text::from(lines)).block(
             Block::default()
                 .borders(Borders::ALL)
-                .border_type(BorderType::Rounded)
-                .border_style(Style::default().fg(Color::Cyan))
+                .border_type(BorderType::Thick)
+                .border_style(Style::default().bg(Color::Black).fg(Color::Cyan))
                 .title(Span::styled(
                     tr(self.lang, "settings_title"),
-                    Style::default()
+                    Style::default().bg(Color::Black)
                         .fg(Color::LightCyan)
                         .add_modifier(Modifier::BOLD),
                 )),
@@ -85,12 +85,12 @@ impl App {
         let prefix = if selected { "  ▸ " } else { "    " };
         let style = selected_style(selected);
         lines.push(Line::from(vec![
-            Span::styled(prefix, Style::default().fg(Color::Cyan)),
+            Span::styled(prefix, Style::default().bg(Color::Black).fg(Color::Cyan)),
             Span::styled(format!("{label}: "), style),
             chip(value.to_string(), Color::White),
             Span::styled(
                 format!("   {}", setting_hint(self.lang, idx)),
-                Style::default().fg(Color::DarkGray),
+                Style::default().bg(Color::Black).fg(Color::DarkGray),
             ),
         ]));
         lines.push(Line::from(""));
@@ -101,7 +101,7 @@ impl App {
         lines.push(Line::from(vec![
             Span::styled(
                 if selected { "  ▸ " } else { "    " },
-                Style::default().fg(Color::Cyan),
+                Style::default().bg(Color::Black).fg(Color::Cyan),
             ),
             Span::styled(label.to_string(), selected_style(selected)),
             chip(
@@ -196,7 +196,7 @@ fn banner(label: &'static str) -> Line<'static> {
         Span::raw("   "),
         Span::styled(
             label,
-            Style::default()
+            Style::default().bg(Color::Black)
                 .fg(Color::Black)
                 .bg(Color::Cyan)
                 .add_modifier(Modifier::BOLD),
@@ -210,18 +210,18 @@ fn separator() -> Line<'static> {
 
 fn selected_style(selected: bool) -> Style {
     if selected {
-        Style::default()
+        Style::default().bg(Color::Black)
             .fg(Color::LightCyan)
             .add_modifier(Modifier::BOLD)
     } else {
-        Style::default().fg(Color::Gray)
+        Style::default().bg(Color::Black).fg(Color::Gray)
     }
 }
 
 fn chip(value: String, bg: Color) -> Span<'static> {
     Span::styled(
         format!("[ {value} ]"),
-        Style::default()
+        Style::default().bg(Color::Black)
             .fg(Color::Black)
             .bg(bg)
             .add_modifier(Modifier::BOLD),
@@ -233,7 +233,7 @@ fn metric_line(label: &'static str, value: String, color: Color) -> Line<'static
         Span::raw(label),
         Span::styled(
             value,
-            Style::default().fg(color).add_modifier(Modifier::BOLD),
+            Style::default().bg(Color::Black).fg(color).add_modifier(Modifier::BOLD),
         ),
     ])
 }

@@ -128,14 +128,14 @@ fn ops_panel(app: &App) -> Paragraph<'static> {
     lines.push(Line::from(""));
     lines.push(Line::from(vec![Span::styled(
         "Recent tools",
-        Style::default()
+        Style::default().bg(Color::Black)
             .fg(Color::LightYellow)
             .add_modifier(Modifier::BOLD),
     )]));
     if app.tool_timeline.is_empty() {
         lines.push(Line::from(vec![Span::styled(
             "  No tool calls in this task yet.",
-            Style::default().fg(Color::DarkGray),
+            Style::default().bg(Color::Black).fg(Color::DarkGray),
         )]));
     } else {
         for entry in app.tool_timeline.iter().rev().take(8).rev() {
@@ -143,14 +143,14 @@ fn ops_panel(app: &App) -> Paragraph<'static> {
             lines.push(Line::from(vec![
                 Span::styled(
                     format!("  {:<7}", entry.status),
-                    Style::default().fg(color).add_modifier(Modifier::BOLD),
+                    Style::default().bg(Color::Black).fg(color).add_modifier(Modifier::BOLD),
                 ),
                 Span::raw(" "),
-                Span::styled(entry.name.clone(), Style::default().fg(Color::LightYellow)),
+                Span::styled(entry.name.clone(), Style::default().bg(Color::Black).fg(Color::LightYellow)),
             ]));
             lines.push(Line::from(vec![
                 Span::raw("    "),
-                Span::styled(entry.summary.clone(), Style::default().fg(Color::Gray)),
+                Span::styled(entry.summary.clone(), Style::default().bg(Color::Black).fg(Color::Gray)),
             ]));
         }
     }
@@ -168,12 +168,12 @@ fn push_section(
 ) {
     lines.push(Line::from(vec![Span::styled(
         format!("{title}:"),
-        Style::default().fg(color).add_modifier(Modifier::BOLD),
+        Style::default().bg(Color::Black).fg(color).add_modifier(Modifier::BOLD),
     )]));
     for line in value.lines().take(limit) {
         lines.push(Line::from(vec![
             Span::raw("  "),
-            Span::styled(line.to_string(), Style::default().fg(Color::White)),
+            Span::styled(line.to_string(), Style::default().bg(Color::Black).fg(Color::White)),
         ]));
     }
 }
@@ -182,34 +182,34 @@ fn push_inline(lines: &mut Vec<Line<'static>>, title: &'static str, value: &str,
     lines.push(Line::from(vec![
         Span::styled(
             format!("{title}: "),
-            Style::default().fg(color).add_modifier(Modifier::BOLD),
+            Style::default().bg(Color::Black).fg(color).add_modifier(Modifier::BOLD),
         ),
-        Span::styled(empty_as(value, "none"), Style::default().fg(Color::White)),
+        Span::styled(empty_as(value, "none"), Style::default().bg(Color::Black).fg(Color::White)),
     ]));
 }
 
 fn block(title: &'static str, color: Color) -> Block<'static> {
     Block::default()
         .borders(Borders::ALL)
-        .border_type(BorderType::Rounded)
-        .border_style(Style::default().fg(color))
+        .border_type(BorderType::Thick)
+        .border_style(Style::default().bg(Color::Black).fg(color))
         .title(Span::styled(
             title,
-            Style::default().fg(color).add_modifier(Modifier::BOLD),
+            Style::default().bg(Color::Black).fg(color).add_modifier(Modifier::BOLD),
         ))
 }
 
 fn label(text: &'static str) -> Span<'static> {
     Span::styled(
         text,
-        Style::default()
+        Style::default().bg(Color::Black)
             .fg(Color::LightCyan)
             .add_modifier(Modifier::BOLD),
     )
 }
 
 fn value(text: impl Into<String>) -> Span<'static> {
-    Span::styled(text.into(), Style::default().fg(Color::White))
+    Span::styled(text.into(), Style::default().bg(Color::Black).fg(Color::White))
 }
 
 fn gap() -> Span<'static> {
