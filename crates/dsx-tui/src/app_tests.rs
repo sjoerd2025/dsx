@@ -185,39 +185,39 @@ mod tests {
         app.input = "polish UI".into();
 
         assert!(app.draft_focused_scope_task());
-        assert_eq!(app.input, "use folder 1234 only: polish UI");
+        assert_eq!(app.input, "используй папку 1234 только: polish UI");
         assert_eq!(app.cursor_pos, app.input.chars().count());
         assert!(!app.show_context);
 
         app.show_context = true;
-        app.input = "use folder old only: polish UI".into();
+        app.input = "используй папку old только: polish UI".into();
 
         assert!(app.draft_focused_scope_task());
-        assert_eq!(app.input, "use folder 1234 only: polish UI");
+        assert_eq!(app.input, "используй папку 1234 только: polish UI");
 
         app.show_context = true;
         app.input = "используй папку old только: отполируй UI".into();
 
         assert!(app.draft_focused_scope_task());
-        assert_eq!(app.input, "use folder 1234 only: отполируй UI");
+        assert_eq!(app.input, "используй папку 1234 только: отполируй UI");
 
         app.show_context = true;
         app.input = "используй папку old только отполируй UI".into();
 
         assert!(app.draft_focused_scope_task());
-        assert_eq!(app.input, "use folder 1234 only: отполируй UI");
+        assert_eq!(app.input, "используй папку 1234 только: отполируй UI");
 
         app.show_context = true;
-        app.input = "use folder old only polish UI".into();
+        app.input = "используй папку old только: polish UI".into();
 
         assert!(app.draft_focused_scope_task());
-        assert_eq!(app.input, "use folder 1234 only: polish UI");
+        assert_eq!(app.input, "используй папку 1234 только: polish UI");
 
         app.show_context = true;
         app.input = "используй текущий воркспейс только: проверь сборку".into();
 
         assert!(app.draft_focused_scope_task());
-        assert_eq!(app.input, "use folder 1234 only: проверь сборку");
+        assert_eq!(app.input, "используй папку 1234 только: проверь сборку");
 
         app.show_context = true;
         app.lang = Language::Russian;
