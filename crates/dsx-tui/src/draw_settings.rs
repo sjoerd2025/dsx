@@ -67,7 +67,7 @@ impl App {
         let paragraph = Paragraph::new(Text::from(lines)).block(
             Block::default()
                 .borders(Borders::ALL)
-                .border_type(BorderType::Rounded)
+                .border_type(BorderType::Thick)
                 .border_style(Style::default().fg(Color::Cyan))
                 .title(Span::styled(
                     tr(self.lang, "settings_title"),
@@ -197,8 +197,8 @@ fn banner(label: &'static str) -> Line<'static> {
         Span::styled(
             label,
             Style::default()
-                .fg(Color::Black)
-                .bg(Color::Cyan)
+                .fg(Color::LightCyan)
+                .bg(Color::Black)
                 .add_modifier(Modifier::BOLD),
         ),
     ])
@@ -222,8 +222,8 @@ fn chip(value: String, bg: Color) -> Span<'static> {
     Span::styled(
         format!("[ {value} ]"),
         Style::default()
-            .fg(Color::Black)
-            .bg(bg)
+            .fg(bg)
+            .bg(Color::Black)
             .add_modifier(Modifier::BOLD),
     )
 }
