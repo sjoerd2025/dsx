@@ -34,8 +34,8 @@ impl App {
             Span::styled(
                 format!(" {task} "),
                 Style::default()
-                    .fg(Color::Black)
-                    .bg(Color::LightGreen)
+                    .fg(Color::LightGreen)
+                    .bg(Color::Black)
                     .add_modifier(Modifier::BOLD),
             ),
             Span::raw(" "),
