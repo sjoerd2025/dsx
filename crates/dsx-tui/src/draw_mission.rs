@@ -191,7 +191,7 @@ fn push_inline(lines: &mut Vec<Line<'static>>, title: &'static str, value: &str,
 fn block(title: &'static str, color: Color) -> Block<'static> {
     Block::default()
         .borders(Borders::ALL)
-        .border_type(BorderType::Rounded)
+        .border_type(BorderType::Thick)
         .border_style(Style::default().fg(color))
         .title(Span::styled(
             title,
