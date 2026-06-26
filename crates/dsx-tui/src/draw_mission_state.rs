@@ -49,19 +49,17 @@ pub(crate) fn scope_guard_text(app: &App) -> String {
 
 pub(crate) fn scope_color(app: &App) -> Color {
     if app.scope_violations > 0 {
-        Color::LightRed
-    } else if app.scope_lock.status == "Narrowed" {
-        Color::LightGreen
+        Color::LightMagenta
     } else {
-        Color::LightYellow
+        Color::LightGreen
     }
 }
 
 pub(crate) fn tool_status_color(status: &str) -> Color {
     match status {
         "ok" => Color::LightGreen,
-        "failed" | "blocked" => Color::LightRed,
-        _ => Color::White,
+        "failed" | "blocked" => Color::LightMagenta,
+        _ => Color::Cyan,
     }
 }
 
