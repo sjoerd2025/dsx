@@ -165,7 +165,7 @@ impl App {
 fn panel_block<'a>(title: &'a str, border: Color, title_color: Color) -> Block<'a> {
     Block::default()
         .borders(Borders::ALL)
-        .border_type(BorderType::Rounded)
+        .border_type(BorderType::Thick)
         .border_style(Style::default().fg(border))
         .title(Span::styled(
             title,
