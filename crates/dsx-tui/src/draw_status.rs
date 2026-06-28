@@ -20,7 +20,7 @@ impl App {
             "yolo" => Color::LightRed,
             "auto" => Color::LightYellow,
             "ask" => Color::LightCyan,
-            "plan-only" => Color::LightBlue,
+            "plan-only" => Color::Cyan,
             _ => Color::DarkGray,
         };
         let running = matches!(self.agent_task, AgentTask::Running(_));

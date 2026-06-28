@@ -44,8 +44,12 @@ pub fn configure_initial_app(
     app.run_budget.max_cost_usd = budget_limits.max_run_cost_usd;
     app.scope_lock.launch_scope = project_root.display().to_string();
     app.scope_lock.active_scope = project_root.display().to_string();
-    app.push_tool_event("workspace_launch", "ok", &format!("Workspace root: {}", project_root.display()));
-    
+    app.push_tool_event(
+        "workspace_launch",
+        "ok",
+        &format!("Workspace root: {}", project_root.display()),
+    );
+
     load_history(&mut app, history_events);
     ensure_git(project_root, &mut app);
     if let Ok(files) = dsx_fs::list_files(project_root) {

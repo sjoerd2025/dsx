@@ -25,7 +25,7 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
+                    .border_type(BorderType::Thick)
                     .border_style(Style::default().fg(Color::LightCyan))
                     .title(Span::styled(
                         " Context Capsule ",
@@ -43,17 +43,11 @@ impl App {
 fn append_brief(brief: &TaskBriefPanel, lines: &mut Vec<Line<'static>>) {
     push_field(lines, "Goal", &brief.goal, Color::LightCyan, 3);
     push_field(lines, "Done", &brief.done, Color::LightGreen, 2);
-    push_field(lines, "Plan", &brief.plan, Color::White, 5);
+    push_field(lines, "Plan", &brief.plan, Color::Cyan, 5);
     push_field(lines, "Last", &brief.last_changes, Color::Yellow, 3);
-    push_field(lines, "Next", &brief.next_step, Color::LightMagenta, 2);
+    push_field(lines, "Next", &brief.next_step, Color::LightGreen, 2);
     push_field(lines, "Constraints", &brief.constraints, Color::LightRed, 5);
-    push_field(
-        lines,
-        "Architecture",
-        &brief.architecture,
-        Color::LightBlue,
-        8,
-    );
+    push_field(lines, "Architecture", &brief.architecture, Color::Cyan, 8);
 }
 
 fn append_scope(app: &App, lines: &mut Vec<Line<'static>>) {
@@ -85,7 +79,7 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
     lines.push(Line::from(vec![Span::styled(
         "Folder notes:",
         Style::default()
-            .fg(Color::LightBlue)
+            .fg(Color::Cyan)
             .add_modifier(Modifier::BOLD),
     )]));
     if app.folder_notes.is_empty() {
@@ -107,7 +101,7 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
                     .fg(if selected {
                         Color::LightCyan
                     } else {
-                        Color::LightBlue
+                        Color::Cyan
                     })
                     .add_modifier(if selected {
                         Modifier::BOLD
@@ -116,7 +110,7 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
                     }),
             ),
             Span::raw(" "),
-            Span::styled(note.summary.clone(), Style::default().fg(Color::White)),
+            Span::styled(note.summary.clone(), Style::default().fg(Color::Cyan)),
         ]));
         lines.push(Line::from(vec![
             Span::raw("    next: "),
@@ -124,30 +118,15 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
         ]));
         lines.push(Line::from(vec![
             Span::raw("    arch: "),
-            Span::styled(
-                note.architecture.clone(),
-                Style::default().fg(Color::LightBlue),
-            ),
+            Span::styled(note.architecture.clone(), Style::default().fg(Color::Cyan)),
         ]));
     }
     if let Some(note) = app.focused_folder_note() {
         lines.push(Line::from(""));
         push_inline(lines, "Focused", &note.folder, Color::LightCyan);
         append_focused_action(app, lines);
-        push_field(
-            lines,
-            "Focused next",
-            &note.next_step,
-            Color::LightMagenta,
-            2,
-        );
-        push_field(
-            lines,
-            "Focused arch",
-            &note.architecture,
-            Color::LightBlue,
-            3,
-        );
+        push_field(lines, "Focused next", &note.next_step, Color::LightGreen, 2);
+        push_field(lines, "Focused arch", &note.architecture, Color::Cyan, 3);
     }
 }
 
@@ -224,7 +203,7 @@ fn push_field(
     for line in value.lines().take(limit) {
         lines.push(Line::from(vec![
             Span::raw("  "),
-            Span::styled(line.to_string(), Style::default().fg(Color::White)),
+            Span::styled(line.to_string(), Style::default().fg(Color::Cyan)),
         ]));
     }
 }
@@ -240,7 +219,7 @@ fn push_inline(lines: &mut Vec<Line<'static>>, label: &'static str, value: &str,
             format!("{label}: "),
             Style::default().fg(color).add_modifier(Modifier::BOLD),
         ),
-        Span::styled(shown.to_string(), Style::default().fg(Color::White)),
+        Span::styled(shown.to_string(), Style::default().fg(Color::Cyan)),
     ]));
 }
 

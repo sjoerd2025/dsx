@@ -39,12 +39,12 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
+                    .border_type(BorderType::Thick)
                     .border_style(Style::default().fg(Color::DarkGray))
                     .title(Span::styled(
                         tr(self.lang, "sidebar_title"),
                         Style::default()
-                            .fg(Color::LightBlue)
+                            .fg(Color::Cyan)
                             .add_modifier(Modifier::BOLD),
                     )),
             )
@@ -71,12 +71,12 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::LightMagenta))
+                    .border_type(BorderType::Thick)
+                    .border_style(Style::default().fg(Color::LightGreen))
                     .title(Span::styled(
                         tr(self.lang, "reasoning_title"),
                         Style::default()
-                            .fg(Color::LightMagenta)
+                            .fg(Color::LightGreen)
                             .add_modifier(Modifier::BOLD),
                     )),
             )
@@ -90,7 +90,7 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
+                    .border_type(BorderType::Thick)
                     .border_style(Style::default().fg(Color::Yellow))
                     .title(Span::styled(
                         tr(self.lang, "diff_title"),
@@ -108,14 +108,12 @@ impl App {
 fn file_style(path: &str) -> Style {
     if path.ends_with('/') || path.contains('/') {
         Style::default()
-            .fg(Color::LightBlue)
+            .fg(Color::Cyan)
             .add_modifier(Modifier::BOLD)
     } else if path.ends_with(".rs") {
         Style::default().fg(Color::Yellow)
-    } else if path.ends_with(".toml") || path.ends_with(".md") {
-        Style::default().fg(Color::Cyan)
     } else {
-        Style::default().fg(Color::White)
+        Style::default().fg(Color::Cyan)
     }
 }
 
@@ -143,7 +141,7 @@ fn reasoning_placeholder(lang: crate::types::Language) -> Vec<Line<'static>> {
                 crate::types::Language::Chinese => "  ⟳ API 握手成功...",
                 crate::types::Language::English => "  ⟳ Handshake established...",
             },
-            Color::LightMagenta,
+            Color::LightGreen,
             true,
         ),
         placeholder_line(
@@ -226,6 +224,6 @@ fn diff_style(line: &str) -> Style {
     } else if line.starts_with("diff") || line.starts_with("index") {
         Style::default().fg(Color::DarkGray)
     } else {
-        Style::default().fg(Color::White)
+        Style::default().fg(Color::Cyan)
     }
 }
