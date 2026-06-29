@@ -22,14 +22,14 @@ pub(crate) fn append_run_ledger_lines(
     lines.push(Line::from(vec![Span::styled(
         "Run ledger",
         Style::default()
-            .fg(Color::LightCyan)
+            .fg(Color::Cyan)
             .add_modifier(Modifier::BOLD),
     )]));
     lines.push(Line::from(vec![
         Span::raw("  "),
         Span::styled(
             run_ledger_summary_text(app),
-            Style::default().fg(Color::White),
+            Style::default().fg(Color::LightGreen),
         ),
     ]));
     if app.run_ledger.estimated_tokens_saved > 0 {
@@ -37,7 +37,7 @@ pub(crate) fn append_run_ledger_lines(
             Span::raw("  compact saved "),
             Span::styled(
                 format!("~{} tok", app.run_ledger.estimated_tokens_saved),
-                Style::default().fg(Color::Gray),
+                Style::default().fg(Color::LightCyan),
             ),
         ]));
     }
@@ -52,7 +52,9 @@ fn append_recent_runs(
     if recent.is_empty() {
         lines.push(Line::from(vec![Span::styled(
             "  No saved agent runs yet.",
-            Style::default().fg(Color::DarkGray),
+            Style::default()
+                .fg(Color::LightCyan)
+                .add_modifier(Modifier::ITALIC),
         )]));
         return;
     }
@@ -66,7 +68,7 @@ fn append_recent_runs(
                     .add_modifier(Modifier::BOLD),
             ),
             Span::raw(" "),
-            Span::styled(run.scope.clone(), Style::default().fg(Color::LightYellow)),
+            Span::styled(run.scope.clone(), Style::default().fg(Color::Cyan)),
             Span::raw(format!(" {} tok", run.total_tokens)),
             Span::raw(format!(" scope:{}", run.scope_violations)),
         ]));
@@ -74,7 +76,7 @@ fn append_recent_runs(
             Span::raw("    "),
             Span::styled(
                 format!("{} {}", run.id, truncate(&run.task, 82)),
-                Style::default().fg(Color::Gray),
+                Style::default().fg(Color::LightGreen),
             ),
         ]));
     }
@@ -83,9 +85,9 @@ fn append_recent_runs(
 fn status_color(status: &str) -> Color {
     match status {
         "completed" => Color::LightGreen,
-        "running" => Color::LightYellow,
+        "running" => Color::Cyan,
         "failed" | "cancelled" => Color::LightRed,
-        _ => Color::White,
+        _ => Color::LightCyan,
     }
 }
 

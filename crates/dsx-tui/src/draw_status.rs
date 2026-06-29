@@ -18,10 +18,10 @@ impl App {
         let task = task_indicator(self.lang, &self.agent_task);
         let mode_color = match self.mode.as_str() {
             "yolo" => Color::LightRed,
-            "auto" => Color::LightYellow,
-            "ask" => Color::LightCyan,
-            "plan-only" => Color::LightBlue,
-            _ => Color::DarkGray,
+            "auto" => Color::LightGreen,
+            "ask" => Color::Cyan,
+            "plan-only" => Color::LightCyan,
+            _ => Color::LightGreen,
         };
         let running = matches!(self.agent_task, AgentTask::Running(_));
         let cost = if self.cost > 0.0 {
@@ -35,7 +35,7 @@ impl App {
                 format!(" {task} "),
                 Style::default()
                     .fg(Color::Black)
-                    .bg(Color::LightGreen)
+                    .bg(Color::Cyan)
                     .add_modifier(Modifier::BOLD),
             ),
             Span::raw(" "),
@@ -95,7 +95,7 @@ impl App {
 
         spans.extend([key("Ctrl+C"), plain(tr(self.lang, "status_quit"))]);
         let status_bar = Paragraph::new(Line::from(spans))
-            .style(Style::default().bg(Color::Black).fg(Color::Gray));
+            .style(Style::default().bg(Color::Black).fg(Color::LightGreen));
         frame.render_widget(status_bar, area);
     }
 }
@@ -241,7 +241,7 @@ fn key(label: &'static str) -> Span<'static> {
     Span::styled(
         label,
         Style::default()
-            .fg(Color::Yellow)
+            .fg(Color::LightCyan)
             .add_modifier(Modifier::BOLD),
     )
 }
@@ -250,7 +250,7 @@ fn strong_owned(label: String) -> Span<'static> {
     Span::styled(
         label,
         Style::default()
-            .fg(Color::LightGreen)
+            .fg(Color::Green)
             .add_modifier(Modifier::BOLD),
     )
 }
