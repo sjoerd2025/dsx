@@ -34,7 +34,7 @@ impl App {
         if self.folder_notes.is_empty() {
             lines.push(Line::from(vec![Span::styled(
                 "No folder summaries yet.",
-                Style::default().fg(Color::DarkGray),
+                Style::default().bg(Color::Black).fg(Color::DarkGray),
             )]));
         } else {
             let focused = self.focused_folder_note_index().unwrap_or(0);
@@ -46,6 +46,7 @@ impl App {
                     Span::styled(
                         note.folder.as_str(),
                         Style::default()
+                            .bg(Color::Black)
                             .fg(if selected {
                                 Color::LightCyan
                             } else {
@@ -53,15 +54,24 @@ impl App {
                             })
                             .add_modifier(Modifier::BOLD),
                     ),
-                    Span::styled(note.summary.as_str(), Style::default().fg(Color::White)),
+                    Span::styled(
+                        note.summary.as_str(),
+                        Style::default().bg(Color::Black).fg(Color::White),
+                    ),
                 ]));
                 lines.push(Line::from(vec![
                     Span::raw("  next: "),
-                    Span::styled(note.next_step.as_str(), Style::default().fg(Color::Gray)),
+                    Span::styled(
+                        note.next_step.as_str(),
+                        Style::default().bg(Color::Black).fg(Color::Gray),
+                    ),
                 ]));
                 lines.push(Line::from(vec![
                     Span::raw("  arch: "),
-                    Span::styled(note.architecture.as_str(), Style::default().fg(Color::Blue)),
+                    Span::styled(
+                        note.architecture.as_str(),
+                        Style::default().bg(Color::Black).fg(Color::Blue),
+                    ),
                 ]));
             }
         }
@@ -77,7 +87,10 @@ impl App {
         let mut lines = Vec::new();
         if self.compaction_events > 0 {
             lines.push(Line::from(vec![
-                Span::styled("compact ", Style::default().fg(Color::LightCyan)),
+                Span::styled(
+                    "compact ",
+                    Style::default().bg(Color::Black).fg(Color::LightCyan),
+                ),
                 Span::styled(
                     format!(
                         "{} event(s), {} msg, ~{} tok saved",
@@ -85,14 +98,14 @@ impl App {
                         self.compacted_messages,
                         self.estimated_tokens_saved
                     ),
-                    Style::default().fg(Color::Gray),
+                    Style::default().bg(Color::Black).fg(Color::Gray),
                 ),
             ]));
         }
         if self.tool_timeline.is_empty() {
             lines.push(Line::from(vec![Span::styled(
                 "No tool calls in this task yet.",
-                Style::default().fg(Color::DarkGray),
+                Style::default().bg(Color::Black).fg(Color::DarkGray),
             )]));
         } else {
             for entry in self.tool_timeline.iter().rev().take(8).rev() {
@@ -104,13 +117,22 @@ impl App {
                 lines.push(Line::from(vec![
                     Span::styled(
                         format!("{} ", entry.status),
-                        Style::default().fg(color).add_modifier(Modifier::BOLD),
+                        Style::default()
+                            .bg(Color::Black)
+                            .fg(color)
+                            .add_modifier(Modifier::BOLD),
                     ),
-                    Span::styled(entry.name.as_str(), Style::default().fg(Color::LightYellow)),
+                    Span::styled(
+                        entry.name.as_str(),
+                        Style::default().bg(Color::Black).fg(Color::LightYellow),
+                    ),
                 ]));
                 lines.push(Line::from(vec![
                     Span::raw("  "),
-                    Span::styled(entry.summary.as_str(), Style::default().fg(Color::Gray)),
+                    Span::styled(
+                        entry.summary.as_str(),
+                        Style::default().bg(Color::Black).fg(Color::Gray),
+                    ),
                 ]));
             }
         }
@@ -165,11 +187,12 @@ impl App {
 fn panel_block<'a>(title: &'a str, border: Color, title_color: Color) -> Block<'a> {
     Block::default()
         .borders(Borders::ALL)
-        .border_type(BorderType::Rounded)
-        .border_style(Style::default().fg(border))
+        .border_type(BorderType::Thick)
+        .border_style(Style::default().bg(Color::Black).fg(border))
         .title(Span::styled(
             title,
             Style::default()
+                .bg(Color::Black)
                 .fg(title_color)
                 .add_modifier(Modifier::BOLD),
         ))
@@ -178,12 +201,18 @@ fn panel_block<'a>(title: &'a str, border: Color, title_color: Color) -> Block<'
 fn push_field(lines: &mut Vec<Line<'_>>, label: &'static str, value: &str, color: Color) {
     lines.push(Line::from(vec![Span::styled(
         format!("{label}:"),
-        Style::default().fg(color).add_modifier(Modifier::BOLD),
+        Style::default()
+            .bg(Color::Black)
+            .fg(color)
+            .add_modifier(Modifier::BOLD),
     )]));
     for line in value.lines().take(4) {
         lines.push(Line::from(vec![
             Span::raw("  "),
-            Span::styled(line.to_string(), Style::default().fg(Color::White)),
+            Span::styled(
+                line.to_string(),
+                Style::default().bg(Color::Black).fg(Color::White),
+            ),
         ]));
     }
 }
@@ -192,8 +221,14 @@ fn push_inline(lines: &mut Vec<Line<'_>>, label: &'static str, value: &str, colo
     lines.push(Line::from(vec![
         Span::styled(
             format!("{label}: "),
-            Style::default().fg(color).add_modifier(Modifier::BOLD),
+            Style::default()
+                .bg(Color::Black)
+                .fg(color)
+                .add_modifier(Modifier::BOLD),
         ),
-        Span::styled(value.to_string(), Style::default().fg(Color::White)),
+        Span::styled(
+            value.to_string(),
+            Style::default().bg(Color::Black).fg(Color::White),
+        ),
     ]));
 }

@@ -30,6 +30,7 @@ impl App {
             items.push(ListItem::new(Line::from(Span::styled(
                 format!("  ... (+{} more files)", remaining),
                 Style::default()
+                    .bg(Color::Black)
                     .fg(Color::DarkGray)
                     .add_modifier(Modifier::ITALIC),
             ))));
@@ -39,16 +40,17 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::DarkGray))
+                    .border_type(BorderType::Thick)
+                    .border_style(Style::default().bg(Color::Black).fg(Color::DarkGray))
                     .title(Span::styled(
                         tr(self.lang, "sidebar_title"),
                         Style::default()
+                            .bg(Color::Black)
                             .fg(Color::LightBlue)
                             .add_modifier(Modifier::BOLD),
                     )),
             )
-            .style(Style::default());
+            .style(Style::default().bg(Color::Black));
 
         frame.render_widget(list, area);
     }
@@ -71,11 +73,12 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::LightMagenta))
+                    .border_type(BorderType::Thick)
+                    .border_style(Style::default().bg(Color::Black).fg(Color::LightMagenta))
                     .title(Span::styled(
                         tr(self.lang, "reasoning_title"),
                         Style::default()
+                            .bg(Color::Black)
                             .fg(Color::LightMagenta)
                             .add_modifier(Modifier::BOLD),
                     )),
@@ -90,11 +93,12 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::Yellow))
+                    .border_type(BorderType::Thick)
+                    .border_style(Style::default().bg(Color::Black).fg(Color::Yellow))
                     .title(Span::styled(
                         tr(self.lang, "diff_title"),
                         Style::default()
+                            .bg(Color::Black)
                             .fg(Color::LightYellow)
                             .add_modifier(Modifier::BOLD),
                     )),
@@ -108,14 +112,15 @@ impl App {
 fn file_style(path: &str) -> Style {
     if path.ends_with('/') || path.contains('/') {
         Style::default()
+            .bg(Color::Black)
             .fg(Color::LightBlue)
             .add_modifier(Modifier::BOLD)
     } else if path.ends_with(".rs") {
-        Style::default().fg(Color::Yellow)
+        Style::default().bg(Color::Black).fg(Color::Yellow)
     } else if path.ends_with(".toml") || path.ends_with(".md") {
-        Style::default().fg(Color::Cyan)
+        Style::default().bg(Color::Black).fg(Color::Cyan)
     } else {
-        Style::default().fg(Color::White)
+        Style::default().bg(Color::Black).fg(Color::White)
     }
 }
 
@@ -126,6 +131,7 @@ fn reasoning_lines(app: &App) -> Vec<Line<'_>> {
             Line::from(vec![Span::styled(
                 line,
                 Style::default()
+                    .bg(Color::Black)
                     .fg(Color::DarkGray)
                     .add_modifier(Modifier::ITALIC),
             )])
@@ -170,7 +176,7 @@ fn reasoning_placeholder(lang: crate::types::Language) -> Vec<Line<'static>> {
 }
 
 fn placeholder_line(text: &'static str, color: Color, bold: bool) -> Line<'static> {
-    let mut style = Style::default().fg(color);
+    let mut style = Style::default().bg(Color::Black).fg(color);
     if bold {
         style = style.add_modifier(Modifier::BOLD);
     } else {
@@ -202,6 +208,7 @@ fn diff_header(lang: crate::types::Language) -> Vec<Line<'static>> {
             Span::styled(
                 tr(lang, "diff_banner"),
                 Style::default()
+                    .bg(Color::Black)
                     .fg(Color::Black)
                     .bg(Color::Yellow)
                     .add_modifier(Modifier::BOLD),
@@ -218,14 +225,14 @@ fn diff_header(lang: crate::types::Language) -> Vec<Line<'static>> {
 
 fn diff_style(line: &str) -> Style {
     if line.starts_with('+') && !line.starts_with("+++") {
-        Style::default().fg(Color::Green)
+        Style::default().bg(Color::Black).fg(Color::Green)
     } else if line.starts_with('-') && !line.starts_with("---") {
-        Style::default().fg(Color::Red)
+        Style::default().bg(Color::Black).fg(Color::Red)
     } else if line.starts_with("@@") {
-        Style::default().fg(Color::Cyan)
+        Style::default().bg(Color::Black).fg(Color::Cyan)
     } else if line.starts_with("diff") || line.starts_with("index") {
-        Style::default().fg(Color::DarkGray)
+        Style::default().bg(Color::Black).fg(Color::DarkGray)
     } else {
-        Style::default().fg(Color::White)
+        Style::default().bg(Color::Black).fg(Color::White)
     }
 }

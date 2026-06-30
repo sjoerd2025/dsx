@@ -34,6 +34,7 @@ impl App {
             Span::styled(
                 format!(" {task} "),
                 Style::default()
+                    .bg(Color::Black)
                     .fg(Color::Black)
                     .bg(Color::LightGreen)
                     .add_modifier(Modifier::BOLD),
@@ -41,7 +42,10 @@ impl App {
             Span::raw(" "),
             Span::styled(
                 format!(" [{}] ", self.mode.to_uppercase()),
-                Style::default().fg(mode_color).add_modifier(Modifier::BOLD),
+                Style::default()
+                    .bg(Color::Black)
+                    .fg(mode_color)
+                    .add_modifier(Modifier::BOLD),
             ),
         ];
 
@@ -94,8 +98,11 @@ impl App {
         }
 
         spans.extend([key("Ctrl+C"), plain(tr(self.lang, "status_quit"))]);
-        let status_bar = Paragraph::new(Line::from(spans))
-            .style(Style::default().bg(Color::Black).fg(Color::Gray));
+        let status_bar = Paragraph::new(Line::from(spans)).style(
+            Style::default()
+                .bg(Color::Black)
+                .fg(Color::Gray),
+        );
         frame.render_widget(status_bar, area);
     }
 }
@@ -241,6 +248,7 @@ fn key(label: &'static str) -> Span<'static> {
     Span::styled(
         label,
         Style::default()
+            .bg(Color::Black)
             .fg(Color::Yellow)
             .add_modifier(Modifier::BOLD),
     )
@@ -250,6 +258,7 @@ fn strong_owned(label: String) -> Span<'static> {
     Span::styled(
         label,
         Style::default()
+            .bg(Color::Black)
             .fg(Color::LightGreen)
             .add_modifier(Modifier::BOLD),
     )

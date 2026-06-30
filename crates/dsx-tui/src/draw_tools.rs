@@ -14,19 +14,34 @@ impl App {
     pub fn draw_tools(&self, frame: &mut Frame, area: Rect) {
         let mut lines: Vec<Line<'static>> = vec![
             Line::from(vec![
-                Span::styled("Active scope: ", Style::default().fg(Color::LightCyan)),
+                Span::styled(
+                    "Active scope: ",
+                    Style::default().bg(Color::Black).fg(Color::LightCyan),
+                ),
                 Span::styled(
                     scope_text(&self.scope_lock.active_scope).to_string(),
-                    Style::default().fg(Color::White),
+                    Style::default().bg(Color::Black).fg(Color::White),
                 ),
             ]),
             Line::from(vec![
-                Span::styled("Scope guard: ", Style::default().fg(scope_color(self))),
-                Span::styled(scope_guard_text(self), Style::default().fg(Color::White)),
+                Span::styled(
+                    "Scope guard: ",
+                    Style::default().bg(Color::Black).fg(scope_color(self)),
+                ),
+                Span::styled(
+                    scope_guard_text(self),
+                    Style::default().bg(Color::Black).fg(Color::White),
+                ),
             ]),
             Line::from(vec![
-                Span::styled("Tool totals: ", Style::default().fg(Color::LightYellow)),
-                Span::styled(tool_totals_text(self), Style::default().fg(Color::White)),
+                Span::styled(
+                    "Tool totals: ",
+                    Style::default().bg(Color::Black).fg(Color::LightYellow),
+                ),
+                Span::styled(
+                    tool_totals_text(self),
+                    Style::default().bg(Color::Black).fg(Color::White),
+                ),
             ]),
             Line::from(""),
         ];
@@ -39,7 +54,7 @@ impl App {
         if self.tool_timeline.is_empty() {
             lines.push(Line::from(vec![Span::styled(
                 "No tool calls in this task yet.",
-                Style::default().fg(Color::DarkGray),
+                Style::default().bg(Color::Black).fg(Color::DarkGray),
             )]));
         } else {
             append_tools(self, &mut lines);
@@ -49,11 +64,12 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::Yellow))
+                    .border_type(BorderType::Thick)
+                    .border_style(Style::default().bg(Color::Black).fg(Color::Yellow))
                     .title(Span::styled(
                         " Tools / Scope Guard ",
                         Style::default()
+                            .bg(Color::Black)
                             .fg(Color::LightYellow)
                             .add_modifier(Modifier::BOLD),
                     )),
@@ -70,31 +86,43 @@ fn append_tools(app: &App, lines: &mut Vec<Line<'static>>) {
         lines.push(Line::from(vec![
             Span::styled(
                 format!("{:02} ", idx + 1),
-                Style::default().fg(Color::DarkGray),
+                Style::default().bg(Color::Black).fg(Color::DarkGray),
             ),
             Span::styled(
                 format!("{:<7}", entry.status),
-                Style::default().fg(color).add_modifier(Modifier::BOLD),
+                Style::default()
+                    .bg(Color::Black)
+                    .fg(color)
+                    .add_modifier(Modifier::BOLD),
             ),
             Span::raw(" "),
-            Span::styled(entry.name.clone(), Style::default().fg(Color::LightYellow)),
+            Span::styled(
+                entry.name.clone(),
+                Style::default().bg(Color::Black).fg(Color::LightYellow),
+            ),
         ]));
         lines.push(Line::from(vec![
             Span::raw("   "),
-            Span::styled(entry.summary.clone(), Style::default().fg(Color::Gray)),
+            Span::styled(
+                entry.summary.clone(),
+                Style::default().bg(Color::Black).fg(Color::Gray),
+            ),
         ]));
     }
 }
 
 fn compaction_line(app: &App) -> Line<'static> {
     Line::from(vec![
-        Span::styled("compact ", Style::default().fg(Color::LightCyan)),
+        Span::styled(
+            "compact ",
+            Style::default().bg(Color::Black).fg(Color::LightCyan),
+        ),
         Span::styled(
             format!(
                 "{} event(s), {} msg, ~{} tok saved",
                 app.compaction_events, app.compacted_messages, app.estimated_tokens_saved
             ),
-            Style::default().fg(Color::Gray),
+            Style::default().bg(Color::Black).fg(Color::Gray),
         ),
     ])
 }

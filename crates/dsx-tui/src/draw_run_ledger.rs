@@ -22,6 +22,7 @@ pub(crate) fn append_run_ledger_lines(
     lines.push(Line::from(vec![Span::styled(
         "Run ledger",
         Style::default()
+            .bg(Color::Black)
             .fg(Color::LightCyan)
             .add_modifier(Modifier::BOLD),
     )]));
@@ -29,7 +30,7 @@ pub(crate) fn append_run_ledger_lines(
         Span::raw("  "),
         Span::styled(
             run_ledger_summary_text(app),
-            Style::default().fg(Color::White),
+            Style::default().bg(Color::Black).fg(Color::White),
         ),
     ]));
     if app.run_ledger.estimated_tokens_saved > 0 {
@@ -37,7 +38,7 @@ pub(crate) fn append_run_ledger_lines(
             Span::raw("  compact saved "),
             Span::styled(
                 format!("~{} tok", app.run_ledger.estimated_tokens_saved),
-                Style::default().fg(Color::Gray),
+                Style::default().bg(Color::Black).fg(Color::Gray),
             ),
         ]));
     }
@@ -52,7 +53,7 @@ fn append_recent_runs(
     if recent.is_empty() {
         lines.push(Line::from(vec![Span::styled(
             "  No saved agent runs yet.",
-            Style::default().fg(Color::DarkGray),
+            Style::default().bg(Color::Black).fg(Color::DarkGray),
         )]));
         return;
     }
@@ -62,11 +63,15 @@ fn append_recent_runs(
             Span::styled(
                 format!("{:<8}", run.status),
                 Style::default()
+                    .bg(Color::Black)
                     .fg(status_color(&run.status))
                     .add_modifier(Modifier::BOLD),
             ),
             Span::raw(" "),
-            Span::styled(run.scope.clone(), Style::default().fg(Color::LightYellow)),
+            Span::styled(
+                run.scope.clone(),
+                Style::default().bg(Color::Black).fg(Color::LightYellow),
+            ),
             Span::raw(format!(" {} tok", run.total_tokens)),
             Span::raw(format!(" scope:{}", run.scope_violations)),
         ]));
@@ -74,7 +79,7 @@ fn append_recent_runs(
             Span::raw("    "),
             Span::styled(
                 format!("{} {}", run.id, truncate(&run.task, 82)),
-                Style::default().fg(Color::Gray),
+                Style::default().bg(Color::Black).fg(Color::Gray),
             ),
         ]));
     }
