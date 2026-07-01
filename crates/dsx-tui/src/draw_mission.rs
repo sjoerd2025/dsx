@@ -74,7 +74,7 @@ fn task_panel(app: &App) -> Paragraph<'static> {
     push_section(&mut lines, "Goal", &b.goal, Color::LightCyan, 4);
     push_section(&mut lines, "Done", &b.done, Color::LightGreen, 4);
     push_section(&mut lines, "Plan", &b.plan, Color::White, 6);
-    push_section(&mut lines, "Last", &b.last_changes, Color::Yellow, 4);
+    push_section(&mut lines, "Last", &b.last_changes, Color::LightMagenta, 4);
     push_section(&mut lines, "Next", &b.next_step, Color::LightMagenta, 3);
     push_section(
         &mut lines,
@@ -114,7 +114,7 @@ fn ops_panel(app: &App) -> Paragraph<'static> {
             &mut lines,
             "Warning",
             &app.scope_lock.warning,
-            Color::Yellow,
+            Color::LightMagenta,
         );
     }
     push_inline(
@@ -155,7 +155,7 @@ fn ops_panel(app: &App) -> Paragraph<'static> {
         }
     }
     Paragraph::new(Text::from(lines))
-        .block(block(" Scope / Tools ", Color::Yellow))
+        .block(block(" Scope / Tools ", Color::LightMagenta))
         .wrap(Wrap { trim: false })
 }
 
@@ -191,7 +191,7 @@ fn push_inline(lines: &mut Vec<Line<'static>>, title: &'static str, value: &str,
 fn block(title: &'static str, color: Color) -> Block<'static> {
     Block::default()
         .borders(Borders::ALL)
-        .border_type(BorderType::Rounded)
+        .border_type(BorderType::Thick)
         .border_style(Style::default().fg(color))
         .title(Span::styled(
             title,

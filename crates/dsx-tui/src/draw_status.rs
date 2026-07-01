@@ -241,7 +241,7 @@ fn key(label: &'static str) -> Span<'static> {
     Span::styled(
         label,
         Style::default()
-            .fg(Color::Yellow)
+            .fg(Color::LightMagenta)
             .add_modifier(Modifier::BOLD),
     )
 }

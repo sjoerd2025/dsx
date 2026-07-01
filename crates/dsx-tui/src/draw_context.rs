@@ -25,7 +25,7 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
+                    .border_type(BorderType::Thick)
                     .border_style(Style::default().fg(Color::LightCyan))
                     .title(Span::styled(
                         " Context Capsule ",
@@ -44,7 +44,7 @@ fn append_brief(brief: &TaskBriefPanel, lines: &mut Vec<Line<'static>>) {
     push_field(lines, "Goal", &brief.goal, Color::LightCyan, 3);
     push_field(lines, "Done", &brief.done, Color::LightGreen, 2);
     push_field(lines, "Plan", &brief.plan, Color::White, 5);
-    push_field(lines, "Last", &brief.last_changes, Color::Yellow, 3);
+    push_field(lines, "Last", &brief.last_changes, Color::LightMagenta, 3);
     push_field(lines, "Next", &brief.next_step, Color::LightMagenta, 2);
     push_field(lines, "Constraints", &brief.constraints, Color::LightRed, 5);
     push_field(

@@ -16,7 +16,7 @@ impl App {
         push_field(&mut lines, "Goal", &b.goal, Color::LightCyan);
         push_field(&mut lines, "Done", &b.done, Color::LightGreen);
         push_field(&mut lines, "Plan", &b.plan, Color::White);
-        push_field(&mut lines, "Last", &b.last_changes, Color::Yellow);
+        push_field(&mut lines, "Last", &b.last_changes, Color::LightMagenta);
         push_field(&mut lines, "Next", &b.next_step, Color::LightMagenta);
         if !b.active_scope.trim().is_empty() {
             push_field(&mut lines, "Scope", &b.active_scope, Color::Gray);
@@ -116,7 +116,11 @@ impl App {
         }
 
         let paragraph = Paragraph::new(Text::from(lines))
-            .block(panel_block(" Tools ", Color::Yellow, Color::LightYellow))
+            .block(panel_block(
+                " Tools ",
+                Color::LightMagenta,
+                Color::LightYellow,
+            ))
             .wrap(Wrap { trim: false });
 
         frame.render_widget(paragraph, area);
@@ -165,7 +169,7 @@ impl App {
 fn panel_block<'a>(title: &'a str, border: Color, title_color: Color) -> Block<'a> {
     Block::default()
         .borders(Borders::ALL)
-        .border_type(BorderType::Rounded)
+        .border_type(BorderType::Thick)
         .border_style(Style::default().fg(border))
         .title(Span::styled(
             title,
