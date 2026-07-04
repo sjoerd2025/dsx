@@ -14,19 +14,19 @@ impl App {
     pub fn draw_tools(&self, frame: &mut Frame, area: Rect) {
         let mut lines: Vec<Line<'static>> = vec![
             Line::from(vec![
-                Span::styled("Active scope: ", Style::default().fg(Color::LightCyan)),
+                Span::styled("Active scope: ", Style::default().fg(Color::Green)),
                 Span::styled(
                     scope_text(&self.scope_lock.active_scope).to_string(),
-                    Style::default().fg(Color::White),
+                    Style::default().fg(Color::Green),
                 ),
             ]),
             Line::from(vec![
                 Span::styled("Scope guard: ", Style::default().fg(scope_color(self))),
-                Span::styled(scope_guard_text(self), Style::default().fg(Color::White)),
+                Span::styled(scope_guard_text(self), Style::default().fg(Color::Green)),
             ]),
             Line::from(vec![
-                Span::styled("Tool totals: ", Style::default().fg(Color::LightYellow)),
-                Span::styled(tool_totals_text(self), Style::default().fg(Color::White)),
+                Span::styled("Tool totals: ", Style::default().fg(Color::Cyan)),
+                Span::styled(tool_totals_text(self), Style::default().fg(Color::Green)),
             ]),
             Line::from(""),
         ];
@@ -49,12 +49,12 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::Yellow))
+                    .border_type(BorderType::Thick)
+                    .border_style(Style::default().fg(Color::Cyan))
                     .title(Span::styled(
                         " Tools / Scope Guard ",
                         Style::default()
-                            .fg(Color::LightYellow)
+                            .fg(Color::Cyan)
                             .add_modifier(Modifier::BOLD),
                     )),
             )
@@ -77,24 +77,24 @@ fn append_tools(app: &App, lines: &mut Vec<Line<'static>>) {
                 Style::default().fg(color).add_modifier(Modifier::BOLD),
             ),
             Span::raw(" "),
-            Span::styled(entry.name.clone(), Style::default().fg(Color::LightYellow)),
+            Span::styled(entry.name.clone(), Style::default().fg(Color::Cyan)),
         ]));
         lines.push(Line::from(vec![
             Span::raw("   "),
-            Span::styled(entry.summary.clone(), Style::default().fg(Color::Gray)),
+            Span::styled(entry.summary.clone(), Style::default().fg(Color::DarkGray)),
         ]));
     }
 }
 
 fn compaction_line(app: &App) -> Line<'static> {
     Line::from(vec![
-        Span::styled("compact ", Style::default().fg(Color::LightCyan)),
+        Span::styled("compact ", Style::default().fg(Color::Green)),
         Span::styled(
             format!(
                 "{} event(s), {} msg, ~{} tok saved",
                 app.compaction_events, app.compacted_messages, app.estimated_tokens_saved
             ),
-            Style::default().fg(Color::Gray),
+            Style::default().fg(Color::DarkGray),
         ),
     ])
 }
@@ -104,7 +104,7 @@ fn status_color(status: &str) -> Color {
         "ok" => Color::LightGreen,
         "blocked" => Color::LightRed,
         "failed" => Color::LightRed,
-        _ => Color::White,
+        _ => Color::Green,
     }
 }
 

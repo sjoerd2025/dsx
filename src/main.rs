@@ -73,7 +73,7 @@ use context_capsule::run_context_capsule;
 use context_preview::run_context_preview;
 use handlers::{run_edit, run_eval, run_plan, run_scope_preview, task_preview};
 use main_runtime::{
-    api_key, load_or_create_session, initial_mode, load_config_or_default, require_api_key,
+    api_key, initial_mode, load_config_or_default, load_or_create_session, require_api_key,
     run_index_action, run_mcp_action, run_workspace_action,
 };
 

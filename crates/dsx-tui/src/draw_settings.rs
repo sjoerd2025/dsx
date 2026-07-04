@@ -61,18 +61,18 @@ impl App {
         lines.push(metric_line(
             tr(self.lang, "telemetry_tokens"),
             self.tokens.to_string(),
-            Color::White,
+            Color::Green,
         ));
 
         let paragraph = Paragraph::new(Text::from(lines)).block(
             Block::default()
                 .borders(Borders::ALL)
-                .border_type(BorderType::Rounded)
+                .border_type(BorderType::Thick)
                 .border_style(Style::default().fg(Color::Cyan))
                 .title(Span::styled(
                     tr(self.lang, "settings_title"),
                     Style::default()
-                        .fg(Color::LightCyan)
+                        .fg(Color::Green)
                         .add_modifier(Modifier::BOLD),
                 )),
         );
@@ -87,7 +87,7 @@ impl App {
         lines.push(Line::from(vec![
             Span::styled(prefix, Style::default().fg(Color::Cyan)),
             Span::styled(format!("{label}: "), style),
-            chip(value.to_string(), Color::White),
+            chip(value.to_string(), Color::Green),
             Span::styled(
                 format!("   {}", setting_hint(self.lang, idx)),
                 Style::default().fg(Color::DarkGray),
@@ -211,10 +211,10 @@ fn separator() -> Line<'static> {
 fn selected_style(selected: bool) -> Style {
     if selected {
         Style::default()
-            .fg(Color::LightCyan)
+            .fg(Color::Green)
             .add_modifier(Modifier::BOLD)
     } else {
-        Style::default().fg(Color::Gray)
+        Style::default().fg(Color::DarkGray)
     }
 }
 
