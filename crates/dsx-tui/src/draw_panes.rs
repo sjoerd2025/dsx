@@ -39,7 +39,7 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
+                    .border_type(BorderType::Thick)
                     .border_style(Style::default().fg(Color::DarkGray))
                     .title(Span::styled(
                         tr(self.lang, "sidebar_title"),
@@ -71,7 +71,7 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
+                    .border_type(BorderType::Thick)
                     .border_style(Style::default().fg(Color::LightMagenta))
                     .title(Span::styled(
                         tr(self.lang, "reasoning_title"),
@@ -90,12 +90,12 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::Yellow))
+                    .border_type(BorderType::Thick)
+                    .border_style(Style::default().fg(Color::Magenta))
                     .title(Span::styled(
                         tr(self.lang, "diff_title"),
                         Style::default()
-                            .fg(Color::LightYellow)
+                            .fg(Color::LightMagenta)
                             .add_modifier(Modifier::BOLD),
                     )),
             )
@@ -111,7 +111,7 @@ fn file_style(path: &str) -> Style {
             .fg(Color::LightBlue)
             .add_modifier(Modifier::BOLD)
     } else if path.ends_with(".rs") {
-        Style::default().fg(Color::Yellow)
+        Style::default().fg(Color::Magenta)
     } else if path.ends_with(".toml") || path.ends_with(".md") {
         Style::default().fg(Color::Cyan)
     } else {
@@ -203,7 +203,7 @@ fn diff_header(lang: crate::types::Language) -> Vec<Line<'static>> {
                 tr(lang, "diff_banner"),
                 Style::default()
                     .fg(Color::Black)
-                    .bg(Color::Yellow)
+                    .bg(Color::Magenta)
                     .add_modifier(Modifier::BOLD),
             ),
         ]),
@@ -222,10 +222,10 @@ fn diff_style(line: &str) -> Style {
     } else if line.starts_with('-') && !line.starts_with("---") {
         Style::default().fg(Color::Red)
     } else if line.starts_with("@@") {
-        Style::default().fg(Color::Cyan)
+        Style::default().fg(Color::Green)
     } else if line.starts_with("diff") || line.starts_with("index") {
         Style::default().fg(Color::DarkGray)
     } else {
-        Style::default().fg(Color::White)
+        Style::default().fg(Color::Green)
     }
 }

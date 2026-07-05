@@ -18,7 +18,7 @@ impl App {
         let task = task_indicator(self.lang, &self.agent_task);
         let mode_color = match self.mode.as_str() {
             "yolo" => Color::LightRed,
-            "auto" => Color::LightYellow,
+            "auto" => Color::LightMagenta,
             "ask" => Color::LightCyan,
             "plan-only" => Color::LightBlue,
             _ => Color::DarkGray,
@@ -241,7 +241,7 @@ fn key(label: &'static str) -> Span<'static> {
     Span::styled(
         label,
         Style::default()
-            .fg(Color::Yellow)
+            .fg(Color::Magenta)
             .add_modifier(Modifier::BOLD),
     )
 }
