@@ -44,7 +44,7 @@ impl App {
                     .title(Span::styled(
                         tr(self.lang, "sidebar_title"),
                         Style::default()
-                            .fg(Color::LightBlue)
+                            .fg(Color::Magenta)
                             .add_modifier(Modifier::BOLD),
                     )),
             )
@@ -108,14 +108,14 @@ impl App {
 fn file_style(path: &str) -> Style {
     if path.ends_with('/') || path.contains('/') {
         Style::default()
-            .fg(Color::LightBlue)
+            .fg(Color::Magenta)
             .add_modifier(Modifier::BOLD)
     } else if path.ends_with(".rs") {
         Style::default().fg(Color::Yellow)
     } else if path.ends_with(".toml") || path.ends_with(".md") {
-        Style::default().fg(Color::Cyan)
+        Style::default().fg(Color::Magenta)
     } else {
-        Style::default().fg(Color::White)
+        Style::default().fg(Color::Green)
     }
 }
 
@@ -222,10 +222,10 @@ fn diff_style(line: &str) -> Style {
     } else if line.starts_with('-') && !line.starts_with("---") {
         Style::default().fg(Color::Red)
     } else if line.starts_with("@@") {
-        Style::default().fg(Color::Cyan)
+        Style::default().fg(Color::Magenta)
     } else if line.starts_with("diff") || line.starts_with("index") {
         Style::default().fg(Color::DarkGray)
     } else {
-        Style::default().fg(Color::White)
+        Style::default().fg(Color::Green)
     }
 }

@@ -61,18 +61,18 @@ impl App {
         lines.push(metric_line(
             tr(self.lang, "telemetry_tokens"),
             self.tokens.to_string(),
-            Color::White,
+            Color::Green,
         ));
 
         let paragraph = Paragraph::new(Text::from(lines)).block(
             Block::default()
                 .borders(Borders::ALL)
                 .border_type(BorderType::Rounded)
-                .border_style(Style::default().fg(Color::Cyan))
+                .border_style(Style::default().fg(Color::Magenta))
                 .title(Span::styled(
                     tr(self.lang, "settings_title"),
                     Style::default()
-                        .fg(Color::LightCyan)
+                        .fg(Color::Magenta)
                         .add_modifier(Modifier::BOLD),
                 )),
         );
@@ -85,9 +85,9 @@ impl App {
         let prefix = if selected { "  ▸ " } else { "    " };
         let style = selected_style(selected);
         lines.push(Line::from(vec![
-            Span::styled(prefix, Style::default().fg(Color::Cyan)),
+            Span::styled(prefix, Style::default().fg(Color::Magenta)),
             Span::styled(format!("{label}: "), style),
-            chip(value.to_string(), Color::White),
+            chip(value.to_string(), Color::Green),
             Span::styled(
                 format!("   {}", setting_hint(self.lang, idx)),
                 Style::default().fg(Color::DarkGray),
@@ -101,7 +101,7 @@ impl App {
         lines.push(Line::from(vec![
             Span::styled(
                 if selected { "  ▸ " } else { "    " },
-                Style::default().fg(Color::Cyan),
+                Style::default().fg(Color::Magenta),
             ),
             Span::styled(label.to_string(), selected_style(selected)),
             chip(
@@ -198,7 +198,7 @@ fn banner(label: &'static str) -> Line<'static> {
             label,
             Style::default()
                 .fg(Color::Black)
-                .bg(Color::Cyan)
+                .bg(Color::Magenta)
                 .add_modifier(Modifier::BOLD),
         ),
     ])
@@ -211,7 +211,7 @@ fn separator() -> Line<'static> {
 fn selected_style(selected: bool) -> Style {
     if selected {
         Style::default()
-            .fg(Color::LightCyan)
+            .fg(Color::Magenta)
             .add_modifier(Modifier::BOLD)
     } else {
         Style::default().fg(Color::Gray)

@@ -15,7 +15,7 @@ impl App {
         let mut lines = Vec::new();
         push_field(&mut lines, "Goal", &b.goal, Color::LightCyan);
         push_field(&mut lines, "Done", &b.done, Color::LightGreen);
-        push_field(&mut lines, "Plan", &b.plan, Color::White);
+        push_field(&mut lines, "Plan", &b.plan, Color::Green);
         push_field(&mut lines, "Last", &b.last_changes, Color::Yellow);
         push_field(&mut lines, "Next", &b.next_step, Color::LightMagenta);
         if !b.active_scope.trim().is_empty() {
@@ -46,14 +46,14 @@ impl App {
                     Span::styled(
                         note.folder.as_str(),
                         Style::default()
-                            .fg(if selected {
-                                Color::LightCyan
-                            } else {
-                                Color::LightBlue
-                            })
+                    .fg(if selected {
+                        Color::Magenta
+                    } else {
+                        Color::LightCyan
+                    })
                             .add_modifier(Modifier::BOLD),
                     ),
-                    Span::styled(note.summary.as_str(), Style::default().fg(Color::White)),
+                    Span::styled(note.summary.as_str(), Style::default().fg(Color::Green)),
                 ]));
                 lines.push(Line::from(vec![
                     Span::raw("  next: "),
@@ -61,13 +61,13 @@ impl App {
                 ]));
                 lines.push(Line::from(vec![
                     Span::raw("  arch: "),
-                    Span::styled(note.architecture.as_str(), Style::default().fg(Color::Blue)),
+                    Span::styled(note.architecture.as_str(), Style::default().fg(Color::Cyan)),
                 ]));
             }
         }
 
         let paragraph = Paragraph::new(Text::from(lines))
-            .block(panel_block(" Folder Notes ", Color::Blue, Color::LightBlue))
+            .block(panel_block(" Folder Notes ", Color::Cyan, Color::LightCyan))
             .wrap(Wrap { trim: false });
 
         frame.render_widget(paragraph, area);
@@ -135,7 +135,7 @@ impl App {
         push_inline(&mut lines, "Status", &s.status, color);
         push_inline(&mut lines, "Launch", &s.launch_scope, Color::Gray);
         push_inline(&mut lines, "Active", &s.active_scope, Color::LightCyan);
-        push_inline(&mut lines, "Why", &s.reason, Color::White);
+        push_inline(&mut lines, "Why", &s.reason, Color::Green);
         if self.scope_violations > 0 {
             push_inline(
                 &mut lines,
@@ -183,7 +183,7 @@ fn push_field(lines: &mut Vec<Line<'_>>, label: &'static str, value: &str, color
     for line in value.lines().take(4) {
         lines.push(Line::from(vec![
             Span::raw("  "),
-            Span::styled(line.to_string(), Style::default().fg(Color::White)),
+            Span::styled(line.to_string(), Style::default().fg(Color::Green)),
         ]));
     }
 }
@@ -194,6 +194,6 @@ fn push_inline(lines: &mut Vec<Line<'_>>, label: &'static str, value: &str, colo
             format!("{label}: "),
             Style::default().fg(color).add_modifier(Modifier::BOLD),
         ),
-        Span::styled(value.to_string(), Style::default().fg(Color::White)),
+        Span::styled(value.to_string(), Style::default().fg(Color::Green)),
     ]));
 }

@@ -19,8 +19,8 @@ impl App {
         let mode_color = match self.mode.as_str() {
             "yolo" => Color::LightRed,
             "auto" => Color::LightYellow,
-            "ask" => Color::LightCyan,
-            "plan-only" => Color::LightBlue,
+            "ask" => Color::Magenta,
+            "plan-only" => Color::Magenta,
             _ => Color::DarkGray,
         };
         let running = matches!(self.agent_task, AgentTask::Running(_));

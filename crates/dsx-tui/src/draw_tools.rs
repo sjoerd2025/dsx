@@ -14,19 +14,19 @@ impl App {
     pub fn draw_tools(&self, frame: &mut Frame, area: Rect) {
         let mut lines: Vec<Line<'static>> = vec![
             Line::from(vec![
-                Span::styled("Active scope: ", Style::default().fg(Color::LightCyan)),
+                Span::styled("Active scope: ", Style::default().fg(Color::Magenta)),
                 Span::styled(
                     scope_text(&self.scope_lock.active_scope).to_string(),
-                    Style::default().fg(Color::White),
+                    Style::default().fg(Color::Green),
                 ),
             ]),
             Line::from(vec![
                 Span::styled("Scope guard: ", Style::default().fg(scope_color(self))),
-                Span::styled(scope_guard_text(self), Style::default().fg(Color::White)),
+                Span::styled(scope_guard_text(self), Style::default().fg(Color::Green)),
             ]),
             Line::from(vec![
                 Span::styled("Tool totals: ", Style::default().fg(Color::LightYellow)),
-                Span::styled(tool_totals_text(self), Style::default().fg(Color::White)),
+                Span::styled(tool_totals_text(self), Style::default().fg(Color::Green)),
             ]),
             Line::from(""),
         ];
@@ -88,7 +88,7 @@ fn append_tools(app: &App, lines: &mut Vec<Line<'static>>) {
 
 fn compaction_line(app: &App) -> Line<'static> {
     Line::from(vec![
-        Span::styled("compact ", Style::default().fg(Color::LightCyan)),
+        Span::styled("compact ", Style::default().fg(Color::Magenta)),
         Span::styled(
             format!(
                 "{} event(s), {} msg, ~{} tok saved",
@@ -104,7 +104,7 @@ fn status_color(status: &str) -> Color {
         "ok" => Color::LightGreen,
         "blocked" => Color::LightRed,
         "failed" => Color::LightRed,
-        _ => Color::White,
+        _ => Color::Green,
     }
 }
 

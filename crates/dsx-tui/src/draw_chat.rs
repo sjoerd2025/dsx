@@ -78,7 +78,7 @@ fn role_label(lang: Language, role: &str) -> (&'static str, Style) {
                 Language::English => "▸ User",
             },
             Style::default()
-                .fg(Color::LightCyan)
+                .fg(Color::Magenta)
                 .add_modifier(Modifier::BOLD),
         ),
         "assistant" => (
@@ -121,15 +121,15 @@ fn role_label(lang: Language, role: &str) -> (&'static str, Style) {
             },
             Style::default().fg(Color::LightYellow),
         ),
-        _ => ("▸ Message", Style::default().fg(Color::White)),
+        _ => ("▸ Message", Style::default().fg(Color::Green)),
     }
 }
 
 fn message_style(role: &str) -> Style {
     match role {
         "assistant" => Style::default().fg(Color::Green),
-        "user" => Style::default().fg(Color::LightCyan),
-        "tool" => Style::default().fg(Color::White),
+        "user" => Style::default().fg(Color::Magenta),
+        "tool" => Style::default().fg(Color::Green),
         _ => Style::default().fg(Color::Gray),
     }
 }

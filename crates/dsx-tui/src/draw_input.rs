@@ -30,7 +30,7 @@ impl App {
             let (prompt, title, style) = input_state(self);
             Paragraph::new(prompt)
                 .block(input_block(title, style))
-                .style(Style::default().fg(Color::White))
+                .style(Style::default().fg(Color::Green))
                 .wrap(Wrap { trim: false })
         };
 
@@ -61,7 +61,7 @@ fn input_state(app: &App) -> (String, &'static str, Style) {
         AgentTask::Idle => (
             format!("  {}█", app.input),
             tr(app.lang, "input_title_idle"),
-            Style::default().fg(Color::LightCyan),
+            Style::default().fg(Color::Magenta),
         ),
         AgentTask::Running(desc) => (
             format!("  ⟳ {}...", running_label(app.lang, desc)),

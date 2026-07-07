@@ -43,7 +43,7 @@ impl App {
 fn append_brief(brief: &TaskBriefPanel, lines: &mut Vec<Line<'static>>) {
     push_field(lines, "Goal", &brief.goal, Color::LightCyan, 3);
     push_field(lines, "Done", &brief.done, Color::LightGreen, 2);
-    push_field(lines, "Plan", &brief.plan, Color::White, 5);
+    push_field(lines, "Plan", &brief.plan, Color::Green, 5);
     push_field(lines, "Last", &brief.last_changes, Color::Yellow, 3);
     push_field(lines, "Next", &brief.next_step, Color::LightMagenta, 2);
     push_field(lines, "Constraints", &brief.constraints, Color::LightRed, 5);
@@ -116,7 +116,7 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
                     }),
             ),
             Span::raw(" "),
-            Span::styled(note.summary.clone(), Style::default().fg(Color::White)),
+            Span::styled(note.summary.clone(), Style::default().fg(Color::Green)),
         ]));
         lines.push(Line::from(vec![
             Span::raw("    next: "),
@@ -224,7 +224,7 @@ fn push_field(
     for line in value.lines().take(limit) {
         lines.push(Line::from(vec![
             Span::raw("  "),
-            Span::styled(line.to_string(), Style::default().fg(Color::White)),
+            Span::styled(line.to_string(), Style::default().fg(Color::Green)),
         ]));
     }
 }
@@ -240,7 +240,7 @@ fn push_inline(lines: &mut Vec<Line<'static>>, label: &'static str, value: &str,
             format!("{label}: "),
             Style::default().fg(color).add_modifier(Modifier::BOLD),
         ),
-        Span::styled(shown.to_string(), Style::default().fg(Color::White)),
+        Span::styled(shown.to_string(), Style::default().fg(Color::Green)),
     ]));
 }
 
