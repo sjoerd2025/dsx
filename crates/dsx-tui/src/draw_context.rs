@@ -25,12 +25,12 @@ impl App {
             .block(
                 Block::default()
                     .borders(Borders::ALL)
-                    .border_type(BorderType::Rounded)
-                    .border_style(Style::default().fg(Color::LightCyan))
+                    .border_type(BorderType::Thick)
+                    .border_style(Style::default().fg(Color::Cyan))
                     .title(Span::styled(
                         " Context Capsule ",
                         Style::default()
-                            .fg(Color::LightCyan)
+                            .fg(Color::Cyan)
                             .add_modifier(Modifier::BOLD),
                     )),
             )
@@ -41,32 +41,21 @@ impl App {
 }
 
 fn append_brief(brief: &TaskBriefPanel, lines: &mut Vec<Line<'static>>) {
-    push_field(lines, "Goal", &brief.goal, Color::LightCyan, 3);
-    push_field(lines, "Done", &brief.done, Color::LightGreen, 2);
-    push_field(lines, "Plan", &brief.plan, Color::White, 5);
+    push_field(lines, "Goal", &brief.goal, Color::Cyan, 3);
+    push_field(lines, "Done", &brief.done, Color::Green, 2);
+    push_field(lines, "Plan", &brief.plan, Color::DarkGray, 5);
     push_field(lines, "Last", &brief.last_changes, Color::Yellow, 3);
-    push_field(lines, "Next", &brief.next_step, Color::LightMagenta, 2);
+    push_field(lines, "Next", &brief.next_step, Color::Magenta, 2);
     push_field(lines, "Constraints", &brief.constraints, Color::LightRed, 5);
-    push_field(
-        lines,
-        "Architecture",
-        &brief.architecture,
-        Color::LightBlue,
-        8,
-    );
+    push_field(lines, "Architecture", &brief.architecture, Color::Blue, 8);
 }
 
 fn append_scope(app: &App, lines: &mut Vec<Line<'static>>) {
     push_inline(lines, "Launch", &app.scope_lock.launch_scope, Color::Gray);
-    push_inline(
-        lines,
-        "Active",
-        &app.scope_lock.active_scope,
-        Color::LightCyan,
-    );
+    push_inline(lines, "Active", &app.scope_lock.active_scope, Color::Cyan);
     push_inline(lines, "Status", &app.scope_lock.status, scope_color(app));
     if !app.scope_lock.warning.trim().is_empty() {
-        push_inline(lines, "Check", &app.scope_lock.warning, Color::LightYellow);
+        push_inline(lines, "Check", &app.scope_lock.warning, Color::Yellow);
     }
 }
 
@@ -74,7 +63,7 @@ fn append_handoff(app: &App, lines: &mut Vec<Line<'static>>) {
     let color = if app.scope_violations > 0 {
         Color::LightRed
     } else if handoff_ready(app) {
-        Color::LightGreen
+        Color::Green
     } else {
         Color::Gray
     };
@@ -85,7 +74,7 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
     lines.push(Line::from(vec![Span::styled(
         "Folder notes:",
         Style::default()
-            .fg(Color::LightBlue)
+            .fg(Color::Blue)
             .add_modifier(Modifier::BOLD),
     )]));
     if app.folder_notes.is_empty() {
@@ -104,11 +93,7 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
             Span::styled(
                 note.folder.clone(),
                 Style::default()
-                    .fg(if selected {
-                        Color::LightCyan
-                    } else {
-                        Color::LightBlue
-                    })
+                    .fg(if selected { Color::Cyan } else { Color::Blue })
                     .add_modifier(if selected {
                         Modifier::BOLD
                     } else {
@@ -116,7 +101,7 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
                     }),
             ),
             Span::raw(" "),
-            Span::styled(note.summary.clone(), Style::default().fg(Color::White)),
+            Span::styled(note.summary.clone(), Style::default().fg(Color::DarkGray)),
         ]));
         lines.push(Line::from(vec![
             Span::raw("    next: "),
@@ -124,30 +109,15 @@ fn append_folder_notes(app: &App, lines: &mut Vec<Line<'static>>) {
         ]));
         lines.push(Line::from(vec![
             Span::raw("    arch: "),
-            Span::styled(
-                note.architecture.clone(),
-                Style::default().fg(Color::LightBlue),
-            ),
+            Span::styled(note.architecture.clone(), Style::default().fg(Color::Blue)),
         ]));
     }
     if let Some(note) = app.focused_folder_note() {
         lines.push(Line::from(""));
-        push_inline(lines, "Focused", &note.folder, Color::LightCyan);
+        push_inline(lines, "Focused", &note.folder, Color::Cyan);
         append_focused_action(app, lines);
-        push_field(
-            lines,
-            "Focused next",
-            &note.next_step,
-            Color::LightMagenta,
-            2,
-        );
-        push_field(
-            lines,
-            "Focused arch",
-            &note.architecture,
-            Color::LightBlue,
-            3,
-        );
+        push_field(lines, "Focused next", &note.next_step, Color::Magenta, 2);
+        push_field(lines, "Focused arch", &note.architecture, Color::Blue, 3);
     }
 }
 
@@ -158,7 +128,7 @@ fn append_focused_action(app: &App, lines: &mut Vec<Line<'static>>) {
             lines,
             "Focused action",
             &format!("draft next task locked to {scope}"),
-            Color::LightGreen,
+            Color::Green,
         );
     } else {
         push_inline(
@@ -175,7 +145,7 @@ fn append_compaction(app: &App, lines: &mut Vec<Line<'static>>) {
         "{} event(s), {} msg, ~{} tok saved",
         app.compaction_events, app.compacted_messages, app.estimated_tokens_saved
     );
-    push_inline(lines, "Compaction", &status, Color::LightCyan);
+    push_inline(lines, "Compaction", &status, Color::Cyan);
 }
 
 fn handoff_status_text(app: &App) -> String {
@@ -224,7 +194,7 @@ fn push_field(
     for line in value.lines().take(limit) {
         lines.push(Line::from(vec![
             Span::raw("  "),
-            Span::styled(line.to_string(), Style::default().fg(Color::White)),
+            Span::styled(line.to_string(), Style::default().fg(Color::DarkGray)),
         ]));
     }
 }
@@ -240,7 +210,7 @@ fn push_inline(lines: &mut Vec<Line<'static>>, label: &'static str, value: &str,
             format!("{label}: "),
             Style::default().fg(color).add_modifier(Modifier::BOLD),
         ),
-        Span::styled(shown.to_string(), Style::default().fg(Color::White)),
+        Span::styled(shown.to_string(), Style::default().fg(Color::DarkGray)),
     ]));
 }
 
@@ -248,9 +218,9 @@ fn scope_color(app: &App) -> Color {
     if app.scope_violations > 0 {
         Color::LightRed
     } else if app.scope_lock.status == "Narrowed" {
-        Color::LightGreen
+        Color::Green
     } else {
-        Color::LightYellow
+        Color::Yellow
     }
 }
 

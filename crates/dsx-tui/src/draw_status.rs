@@ -18,9 +18,9 @@ impl App {
         let task = task_indicator(self.lang, &self.agent_task);
         let mode_color = match self.mode.as_str() {
             "yolo" => Color::LightRed,
-            "auto" => Color::LightYellow,
-            "ask" => Color::LightCyan,
-            "plan-only" => Color::LightBlue,
+            "auto" => Color::Cyan,
+            "ask" => Color::Cyan,
+            "plan-only" => Color::Cyan,
             _ => Color::DarkGray,
         };
         let running = matches!(self.agent_task, AgentTask::Running(_));
@@ -35,7 +35,7 @@ impl App {
                 format!(" {task} "),
                 Style::default()
                     .fg(Color::Black)
-                    .bg(Color::LightGreen)
+                    .bg(Color::Green)
                     .add_modifier(Modifier::BOLD),
             ),
             Span::raw(" "),
@@ -241,7 +241,7 @@ fn key(label: &'static str) -> Span<'static> {
     Span::styled(
         label,
         Style::default()
-            .fg(Color::Yellow)
+            .fg(Color::Cyan)
             .add_modifier(Modifier::BOLD),
     )
 }
@@ -250,7 +250,7 @@ fn strong_owned(label: String) -> Span<'static> {
     Span::styled(
         label,
         Style::default()
-            .fg(Color::LightGreen)
+            .fg(Color::Green)
             .add_modifier(Modifier::BOLD),
     )
 }

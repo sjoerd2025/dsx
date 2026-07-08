@@ -22,14 +22,14 @@ pub(crate) fn append_run_ledger_lines(
     lines.push(Line::from(vec![Span::styled(
         "Run ledger",
         Style::default()
-            .fg(Color::LightCyan)
+            .fg(Color::Cyan)
             .add_modifier(Modifier::BOLD),
     )]));
     lines.push(Line::from(vec![
         Span::raw("  "),
         Span::styled(
             run_ledger_summary_text(app),
-            Style::default().fg(Color::White),
+            Style::default().fg(Color::DarkGray),
         ),
     ]));
     if app.run_ledger.estimated_tokens_saved > 0 {
@@ -66,7 +66,7 @@ fn append_recent_runs(
                     .add_modifier(Modifier::BOLD),
             ),
             Span::raw(" "),
-            Span::styled(run.scope.clone(), Style::default().fg(Color::LightYellow)),
+            Span::styled(run.scope.clone(), Style::default().fg(Color::Cyan)),
             Span::raw(format!(" {} tok", run.total_tokens)),
             Span::raw(format!(" scope:{}", run.scope_violations)),
         ]));
@@ -82,10 +82,10 @@ fn append_recent_runs(
 
 fn status_color(status: &str) -> Color {
     match status {
-        "completed" => Color::LightGreen,
-        "running" => Color::LightYellow,
+        "completed" => Color::Green,
+        "running" => Color::Cyan,
         "failed" | "cancelled" => Color::LightRed,
-        _ => Color::White,
+        _ => Color::DarkGray,
     }
 }
 
